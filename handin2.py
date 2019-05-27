@@ -6,7 +6,6 @@
     @course: numerical recipes in astrophysics
     @instructor: van daalen, m.p.
 
-    points: 24
 """
 import sys
 

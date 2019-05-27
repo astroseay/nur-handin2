@@ -1,7 +1,9 @@
-\section{1}
+\section{Problem 1}
 \subsection{1a}
 
-Here we test our rng as we did in the first handout. 
+\lstinputlisting{p1a.py}
+
+Here we test our rng as we did in the first handout. The random seed is $0$. 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\linewidth]{./plots/x_x_1.png}
@@ -30,3 +32,4 @@ $5 \times 10^4$, which is not what we would expect from the rng. I am not
 sure what the issue is. I attempted to cast all of the values as \texttt{ints}
 but I was getting runtime errors in the $XOR$ bit-shift. The variance appears
 to be fine, so I left it as is.
+
