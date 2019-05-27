@@ -1,5 +1,6 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
+
 \input{included_packages}
 
 %opening
@@ -17,9 +18,16 @@
 \end{abstract}
 
 \section{Overview}
- We begin by giving a brief overview of \texttt{handin2.py}
+ We begin by giving a brief overview of \texttt{handin2.py}. Explanations,
+ corrections, etc. will be given in the appropriate problem section. This is
+ solely for an overview.
  \lstinputlisting{handin2.py}
-
+First, we see our random number generator (rng). It generates a random number
+between 0 and 1. Our integral calculator uses the midpoint method to calculate 
+integrals. Our \texttt{normalize\_random\_distribution} method utilizes the
+Box-Muller method to generate a Gaussian distribution from a uniform 
+distribution. We then define the error function, Gaussian CDF, the 
+KS-test and Kuiper test for use in problem 1.
 
 \input{p1a}
 
