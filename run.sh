@@ -51,7 +51,7 @@ python3 p5a.py
 # python3 p5g.py
 
 echo "running problem 6.........................."
-python3 p6.py
+python3 p6.py > p6.txt
 
 echo "running problem 7.........................."
 python3 p7.py

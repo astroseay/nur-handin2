@@ -27,11 +27,11 @@ def abline(x,theta,Y):
     y_vals = dot_prod(x,theta)
     # plt.xlim(0, 20)
     # plt.ylim(-10, 60)
-    plt.xlabel('x [Mpc]')
-    plt.ylabel('y [Mpc]')
-    plt.gca().set_aspect(0.1, adjustable='datalim')
-    plt.plot(x,Y,'.',x, y_vals, '-')
-    plt.show()
+    # plt.xlabel('x [Mpc]')
+    # plt.ylabel('y [Mpc]')
+    # plt.gca().set_aspect(0.1, adjustable='datalim')
+    # plt.plot(x,Y,'.',x, y_vals, '-')
+    # plt.show()
 
 def gradientDescentLinearRegression(data,alpha=0.047,iter=500000):
     theta0 = []
@@ -93,8 +93,8 @@ def plot_features(data):
         # plt.figure(i)
         # plt.plot(data[i],data[1],marker='.',ls='None')
         # plt.savefig('./plots/q6plot_{}.png'.format(i),overwrite=True)
-    sns.heatmap(corr,square = True,cbar=True) # ,annot=True,annot_kws={'size': 10})
-    plt.savefig('./plots/correlation_map.png',overwrite=True)
+    # sns.heatmap(corr,square = True,cbar=True) # ,annot=True,annot_kws={'size': 10})
+    # plt.savefig('./plots/correlation_map.png',overwrite=True)
 
 def main():
     # z, t90, log(m/m0), sfr, log(z/z0), ssfr, av

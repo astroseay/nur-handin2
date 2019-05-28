@@ -45,7 +45,7 @@ def main():
     ax = plt.axes(projection='3d')    
     ax.scatter(x,y,z,c=z,cmap='magma',lw=0.5)
     # plt.show()
-    plt.savefig('q5atest.png',format='png',dpi=300)
+    plt.savefig('./plots/pointparticles.png',format='png',dpi=300)
 
 if __name__ == '__main__':
     sys.exit(main())
