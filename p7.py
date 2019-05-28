@@ -74,20 +74,16 @@ class QuadTree():
         fig, ax = plt.subplots(1,figsize=(7,5))
         plt.xlim(self.xlim,self.xlim + self.width)
         plt.ylim(self.ylim,self.ylim + self.height)
-
         children = find_children(self.root)
-
         x = [point.x for point in self.points]
         y = [point.y for point in self.points]
         ax.plot(x, y,marker='.',c='cyan',ls='None',alpha=0.3)
-
         for child in children:
-            ax.add_patch(patches.Rectangle((child.x0,child.y0),child.width,child.height,fill=False))
-
+            ax.add_patch(patches.Rectangle((child.x0,child.y0),child.width,
+                child.height,fill=False))
         plt.xlabel('x pos ',fontsize = 20)
         plt.ylabel('y pos ',fontsize = 20)
         # plt.show()
-
         if save:
             plt.savefig(f)
 
@@ -110,20 +106,31 @@ def tree_subdivide(node,point_limit):
         w_reduced = node.width*0.5
         h_reduced = node.height*0.5
 
-        
-        points_in_sw = check_points(node.x0, node.y0, w_reduced, h_reduced, node.points)
-        sw = Node(node.x0, node.y0, w_reduced, h_reduced, points_in_sw, parent=node)
-        # print('sw points = ',len(sw.points))
+        # points in each quadrant
+        # denoted as sw,nw,se,ne
+        points_in_sw = check_points(node.x0,node.y0,w_reduced,h_reduced,
+                node.points)
 
-        points_in_nw = check_points(node.x0, node.y0 + h_reduced, w_reduced, h_reduced, node.points)
-        nw = Node(node.x0, node.y0 + h_reduced, w_reduced, h_reduced, points_in_nw, parent=node)
-        # print('nw points = ',len(nw.points))
+        points_in_nw = check_points(node.x0,node.y0 + h_reduced,w_reduced,
+                h_reduced,node.points)
 
-        points_in_se = check_points(node.x0 + w_reduced, node.y0, w_reduced, h_reduced, node.points)
-        se = Node(node.x0 + w_reduced, node.y0, w_reduced, h_reduced, points_in_se, parent=node)
+        points_in_se = check_points(node.x0 + w_reduced,node.y0,w_reduced,
+                h_reduced, node.points)
 
-        points_in_ne = check_points(node.x0 + w_reduced, node.y0 + h_reduced, w_reduced, h_reduced, node.points)
-        ne = Node(node.x0 + w_reduced, node.y0 + h_reduced, w_reduced, h_reduced, points_in_ne, parent=node)
+        points_in_ne = check_points(node.x0 + w_reduced,node.y0 + h_reduced,
+                w_reduced,h_reduced,node.points)
+
+        sw = Node(node.x0,node.y0,w_reduced,h_reduced,
+                points_in_sw,parent=node)
+
+        nw = Node(node.x0,node.y0 + h_reduced,w_reduced,h_reduced,
+                points_in_nw,parent=node)
+
+        se = Node(node.x0 + w_reduced,node.y0,w_reduced,h_reduced,
+                points_in_se,parent=node)
+
+        ne = Node(node.x0 + w_reduced,node.y0 + h_reduced,w_reduced,h_reduced,
+                points_in_ne,parent=node)
 
         node.children = [sw,nw,se,ne]
 
@@ -157,7 +164,7 @@ def find_children(node):
 
 
 def calculate_multipole(node):
-
+    # doesn't work lol not used
     children = find_children(node)
 
     for child in children:
@@ -187,9 +194,6 @@ def main():
 
     particle_qtree.subdivide()
     particle_qtree.graph(save=True)
-
-    M = calculate_multipole(particle_qtree.root)
-    print(M)
 
 if __name__ == '__main__':
     sys.exit(main())
