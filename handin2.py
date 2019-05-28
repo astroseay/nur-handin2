@@ -172,18 +172,25 @@ def ks_test(x,cdf):
 
         return P
 
+    # bin up values to make distance measurement easy
+    # distance is simply abs((counts/N) - cdf) for a given x
     N = len(x)
     num_bins = int(100*max(x)-min(x))
     counts,bins = np.histogram(x,bins=num_bins)
     width = bins[1]-bins[0]
     bins += width
     dist = np.zeros(len(counts))
-    c = sum(counts)
-    counts_array = np.zeros(len(counts))
-
+    x_counts = np.zeros(len(counts))\
+    
+    # want to know what i'm looking at
+    # if N == 100000:
+        # print('num_bins: {}\n counts: {}\n bins: {}\n width: {}\n bins: {}\n \
+                # dist: {}\n csum: {}\n'.format(num_bins,counts,bins,width,bins,\
+                # dist,csum))
+                
     for i in range(len(counts)):
-        dist[i] = abs(sum(counts[:i])/c-cdf(bins[i]))
-        counts_array[i] = sum(counts[:i])
+        x_counts[i] = sum(counts[:i])
+        dist[i] = abs((x_counts[i]/N) - cdf(bins[i]))
 
     D = max(abs(dist))
     z = D*(np.sqrt(N) + 0.12 + 0.11/np.sqrt(N))
@@ -212,19 +219,18 @@ def kuiper_test(x,cdf):
             P = 2 *((4*(z**2-1))*v + (16*z**2-1)*v**4 + (32*z**2-1)*v**9)
 
         return P
-
+    
     N = len(x)
     num_bins = int(100*max(x)-min(x))
     counts,bins = np.histogram(x,bins=num_bins)
     width = bins[1]-bins[0]
     bins += width
     dist = np.zeros(len(counts))
-    c = sum(counts)
-    counts_array = np.zeros(len(counts))
+    x_counts = np.zeros(len(counts))
 
     for i in range(len(counts)):
-        dist[i] = abs(sum(counts[:i])/c-cdf(bins[i]))
-        counts_array[i] = sum(counts[:i])
+        x_counts[i] = sum(counts[:i])
+        dist[i] = abs((x_counts[i]/N) - cdf(bins[i]))
 
     D = abs(max(dist)) + abs(min(dist))
     z = D*(np.sqrt(N) + 0.155 + 0.24/np.sqrt(N))

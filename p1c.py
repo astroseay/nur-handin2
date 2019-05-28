@@ -19,7 +19,6 @@ def main():
     nums = 30
     cdf = nur.gaussian_cdf
     num_samples = np.logspace(1,5,num=nums)
-    print(num_samples)
     sample_size = int(1e5)
     my_ks = np.zeros(nums)
     my_prob = np.zeros(nums)
@@ -39,10 +38,10 @@ def main():
 
     for i,s in enumerate(num_samples):
         # slice of x at given s
-        x_s = x[:int(s)]
+        x_s = xn[:int(s)]
         my_ks[i],my_prob[i] = nur.ks_test(x_s,cdf)
         pyth_ks[i],pyth_prob[i] = stats.kstest(x_s,'norm')
-        # my probs are too small
+
         # print('my junk: \n',my_ks[i],my_prob[i])
         # print('stats junk: \n',pyth_ks[i],pyth_prob[i])
 
@@ -52,7 +51,6 @@ def main():
             label='my ks test')
     plt.plot(num_samples,pyth_ks,c='r',ls='None',marker='s',markersize=1,
             label='scipy ks test')
-    plt.ylim(min(pyth_ks)-0.01,max(my_ks)+0.01)
     plt.xscale('log')
     plt.xlabel('sample size')
     plt.ylabel('ks statistic')
@@ -60,8 +58,9 @@ def main():
     plt.savefig('./plots/ks_stat.png',format='png',dpi=300)
 
     plt.figure(2,figsize=(7,5))
-    plt.loglog(num_samples,my_prob,c='b',label='my probabilities')
-    plt.loglog(num_samples,pyth_prob,c='r',label='scipy probabilities')
+    plt.plot(num_samples,my_prob,c='b',label='my probabilities')
+    plt.plot(num_samples,pyth_prob,c='r',label='scipy probabilities')
+    plt.xscale('log')
     plt.xlabel('sample size')
     plt.ylabel('probabilties')
     plt.legend(frameon=False,loc='best')

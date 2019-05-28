@@ -27,17 +27,18 @@ def Pk(n,kx,ky):
 
     return P_k
 
-def gaussian_random_field(Pk):
-
-    # power spectrum
-    # make my own random numbers here
-    noise = np.fft.fft2(np.random.normal(size = (size,size)))
-    amplitude = np.zeros((size,size))
-    for i, kx in enumerate(fftIndgen(size)):
-        for j, ky in enumerate(fftIndgen(size)):            
-            amplitude[i,j] = Pk2(Pk,kx,ky)
-
-    return np.fft.ifft2(noise * amplitude)
+# sample random field, keeping for debugging purposes later
+# def gaussian_random_field(Pk):
+# 
+#     # power spectrum
+#     # make my own random numbers here
+#     noise = np.fft.fft2(np.random.normal(size = (size,size)))
+#     amplitude = np.zeros((size,size))
+#     for i, kx in enumerate(fftIndgen(size)):
+#         for j, ky in enumerate(fftIndgen(size)):            
+#             amplitude[i,j] = Pk2(Pk,kx,ky)
+# 
+#     return np.fft.ifft2(noise * amplitude)
 
 def main():
     seed = 1239078
@@ -81,6 +82,8 @@ def main():
 
         plt.figure(figsize=(7,5))
         im = plt.matshow(np.absolute(gauss_field),interpolation='none')
+        # ax = plt.gca()
+        # plt.colorbar(im,ca)
         plt.xlabel('x [Mpc]',fontsize=20)
         plt.ylabel('y [Mpc]',fontsize=20)
         plt.title('gauss field $n={}$'.format(k),fontsize=25)
