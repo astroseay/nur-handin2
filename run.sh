@@ -60,4 +60,4 @@ echo "running problem 8.........................."
 # python3 p8.py
 
 pdflatex handin2.tex
-
+pdflatex handin2.tex # for hyperref
