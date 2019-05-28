@@ -13,6 +13,7 @@ import h5py
 
 class PointProperties():
     """define mass and x-y coordinates for a point."""
+
     def __init__(self,x,y,mass):
         self.x = x
         self.y = y
@@ -25,6 +26,7 @@ class Node():
     subdivide. because it's in 2d space, it knows x-y, width, and height.
 
     """
+
     def __init__(self,x0,y0,w,h,points,moment=0,parent=None):
         self.x0 = x0
         self.y0 = y0
@@ -46,7 +48,7 @@ class Node():
         return self.points
 
 class QuadTree():
-    """comment this"""
+    """defines the quadtree. if i come back to this i'll make the documentation better."""
 
     def __init__(self,xlim,ylim,leaf_limit,width,height):
         self.xlim = xlim
@@ -66,11 +68,12 @@ class QuadTree():
     def subdivide(self):
         self.root = tree_subdivide(self.root,self.leaf_limit)
 
-
+    # essentially follows the slides to define trees with nodes
+    # that have a leaf limit of 12
     def graph(self,f='./plots/quadtree.png',save=False):
-        fig, ax = plt.subplots(1, figsize=(7, 7))
-        plt.xlim(self.xlim, self.xlim + self.width)
-        plt.ylim(self.ylim, self.ylim + self.height)
+        fig, ax = plt.subplots(1,figsize=(7,5))
+        plt.xlim(self.xlim,self.xlim + self.width)
+        plt.ylim(self.ylim,self.ylim + self.height)
 
         children = find_children(self.root)
 
@@ -79,7 +82,7 @@ class QuadTree():
         ax.plot(x, y,marker='.',c='cyan',ls='None',alpha=0.3)
 
         for child in children:
-            ax.add_patch(patches.Rectangle((child.x0, child.y0), child.width, child.height, fill=False))
+            ax.add_patch(patches.Rectangle((child.x0,child.y0),child.width,child.height,fill=False))
 
         plt.xlabel('x pos ',fontsize = 20)
         plt.ylabel('y pos ',fontsize = 20)
@@ -90,6 +93,7 @@ class QuadTree():
 
 
 def tree_subdivide(node,point_limit):
+    """divide trees from nodes based off of point_limit."""
 
     if len(node.points) == 0:
         # print('zero')
@@ -101,17 +105,19 @@ def tree_subdivide(node,point_limit):
         # print('below lim')
         return
 
-    elif len(node.points) > point_limit:
+    elif len(node.points) > point_limit:\
+        #  scale reduction
         w_reduced = node.width*0.5
         h_reduced = node.height*0.5
 
+        
         points_in_sw = check_points(node.x0, node.y0, w_reduced, h_reduced, node.points)
         sw = Node(node.x0, node.y0, w_reduced, h_reduced, points_in_sw, parent=node)
-        # print('sw points = ', len(sw.points))
+        # print('sw points = ',len(sw.points))
 
         points_in_nw = check_points(node.x0, node.y0 + h_reduced, w_reduced, h_reduced, node.points)
         nw = Node(node.x0, node.y0 + h_reduced, w_reduced, h_reduced, points_in_nw, parent=node)
-        # print('nw points = ', len(nw.points))
+        # print('nw points = ',len(nw.points))
 
         points_in_se = check_points(node.x0 + w_reduced, node.y0, w_reduced, h_reduced, node.points)
         se = Node(node.x0 + w_reduced, node.y0, w_reduced, h_reduced, points_in_se, parent=node)
@@ -119,15 +125,15 @@ def tree_subdivide(node,point_limit):
         points_in_ne = check_points(node.x0 + w_reduced, node.y0 + h_reduced, w_reduced, h_reduced, node.points)
         ne = Node(node.x0 + w_reduced, node.y0 + h_reduced, w_reduced, h_reduced, points_in_ne, parent=node)
 
-        node.children = [sw, nw, se, ne]
+        node.children = [sw,nw,se,ne]
 
         for child in node.children:
-            tree_subdivide(child, point_limit)
+            tree_subdivide(child,point_limit)
 
     return node
 
 
-def check_points(x_node, y_node, width, height, points):
+def check_points(x_node,y_node,width,height,points):
     true_points = []
     for i,point in enumerate(points):
         if x_node < point.x <= x_node + width and \
@@ -183,6 +189,7 @@ def main():
     particle_qtree.graph(save=True)
 
     M = calculate_multipole(particle_qtree.root)
+    print(M)
 
 if __name__ == '__main__':
     sys.exit(main())
