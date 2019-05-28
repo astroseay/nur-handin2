@@ -1,0 +1,21 @@
+\subsection{4b}
+
+\lstinputlisting{p4b.py}
+\lstinputlisting{p4b.txt}
+We use the midpoint rule to calculate the desired integral again, but in terms
+of the scale factor $a$. We give the value of the analytic derivative of the
+linear growth factor at redshift $z=50$ ($a = \frac{1}{51}$),
+\begin{equation}
+ \dot D(t) = \frac{dD}{da}\dot a,
+\end{equation}
+using the integral we calculated numerically. The derivative is,
+\begin{equation}
+ \dot D(t) = \frac{-15}{4}\Omega_m^2 H_0 \frac{I}{a_{\textrm{f}}^3},
+\end{equation}
+where $\Omega_m$ is the matter density, $H_0$ the Hubble constant,
+$a_{\textrm{f}}$ the final scale factor, and $I$ the integral given by,
+\begin{equation}
+ \int_{a=0}^{a=\frac{1}{51}} \frac{\frac{1}{a^3}}
+   {\frac{\Omega_{\textrm{m}}{a^3} + \Omega_{\Lambda}}},
+\end{equation}
+where $\Omega_{\Lambda}$ is the cosmological constant.

@@ -87,7 +87,7 @@ def main():
         plt.xlabel('x [Mpc]',fontsize=20)
         plt.ylabel('y [Mpc]',fontsize=20)
         plt.title('gauss field $n={}$'.format(k),fontsize=25)
-        plt.savefig('./plots/gauss_field_n_{}.png'.format(k),format='png',
+        plt.savefig('./plots/gauss_field_n_{}.png'.format(-k),format='png',
                                                             dpi=300)
 
 if __name__ == '__main__':

@@ -37,7 +37,7 @@ python3 p3.py
 
 echo "running problem 4.........................."
 python3 p4a.py > p4a.txt
-python3 p1b.py
+python3 p4b.py > p4b.txt
 # python3 p4c.py
 # python3 p4d.py
 
