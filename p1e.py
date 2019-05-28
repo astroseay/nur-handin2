@@ -1,6 +1,5 @@
 # question 1e
 # points: 6
-# not started yet!!
 
 import sys
 

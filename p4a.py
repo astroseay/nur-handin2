@@ -19,16 +19,17 @@ def main():
     omega_dm = 0.7
     H_0 = 70 # km/s/Mpc
     lo_z = 50
-    up_z = 1000 # something large that's not np.inf
+    up_z = int(1e4) # something large that's not np.inf
     # integrand defined for function f
     f = lambda z: (1+z) / (H_0**3 * (omega_m*(1+z)**3 + omega_dm))**(1.5)
-    steps = 1000 
+    steps = 10000 
 
     integral = nur.calc_integral(f,lo_z,up_z,steps)
     py_int = quad(f,lo_z,np.inf)
     res = integral*c*H_z50
-    print(integral,res)
-    print('real: {}'.format(py_int))
+    err = (integral-py_int[0])/py_int[0]
+    print('integral: {}\nreal: {}\naccuracy: {}\ngrowth factor: {}\n \
+            python acc: {}'.format(integral,py_int[0],err,res,py_int[1]))
     
     # sample to check integrand
     # fx = lambda x: np.exp(-x**2)

@@ -22,21 +22,26 @@ if [ ! -e colliding.hdf5 ]; then
     wget strw.leidenuniv.nl/~nobels/coursedata/colliding.hdf5
 fi
 
-python3 p1a.py
+echo "running problem 1.........................."
+python3 p1a.py > p1a.txt
 python3 p1b.py
 python3 p1c.py
 python3 p1d.py
 python3 p1e.py
 
+echo "running problem 2.........................."
 python3 p2.py
 
+echo "running problem 3.........................."
 python3 p3.py
 
-python3 p4a.py
+echo "running problem 4.........................."
+python3 p4a.py > p4a.txt
 python3 p1b.py
 # python3 p4c.py
 # python3 p4d.py
 
+echo "running problem 5.........................."
 python3 p5a.py
 # python3 p5b.py
 # python3 p5c.py
@@ -45,41 +50,14 @@ python3 p5a.py
 # python3 p5f.py
 # python3 p5g.py
 
+echo "running problem 6.........................."
 python3 p6.py
 
+echo "running problem 7.........................."
 python3 p7.py
 
+echo "running problem 8.........................."
 # python3 p8.py
 
 pdflatex handin2.tex
-
-# pdflatex p1a.tex
-# pdflatex p1b.tex
-# pdflatex p1c.tex
-# pdflatex p1d.tex
-# pdflatex p1e.tex
-
-# pdflatex p2.tex
-
-# pdflatex p3.tex
-
-# pdflatex p4a.tex
-# pdflatex p1b.tex
-# pdflatex p4c.tex
-# pdflatex p4d.tex
-
-# pdflatex p5a.tex
-# pdflatex p5b.tex
-# pdflatex p5c.tex
-# pdflatex p5d.tex
-# pdflatex p5e.tex
-# pdflatex p5f.tex
-# pdflatex p5g.tex
-
-# pdflatex p6.tex
-
-# pdflatex p7.tex
-
-# pdflatex p8.tex
-
 
