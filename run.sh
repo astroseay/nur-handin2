@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "final hand-in for nur"
 echo "creating the plotting directory if it does not exist"
 
